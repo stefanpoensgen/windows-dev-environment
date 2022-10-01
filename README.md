@@ -5,6 +5,9 @@
 wsl --install
 ```
 
+### [Docker Desktop](https://docs.docker.com/desktop/install/windows-install/)
+Install docker desktop for windows and enable wsl2 integration
+
 ### [X410](https://x410.dev/)
 My favourite x server for wsl2 to use linux gui apps
 ```
@@ -16,17 +19,6 @@ Install google chrome for windows as daily driver and inside wsl2 for dependency
 ```
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
-```
-
-### [Jetbrains Toolbox](https://www.jetbrains.com/toolbox-app/)
-Install jetbrains toolbox and install your favourite jetbrains IDE inside wsl2
-```
-curl https://gist.githubusercontent.com/greeflas/431bc50c23532eee8a7d6c1d603f3921/raw | bash
-```
-
-Windows shortcut path to start PHPStorm from windows start menu 
-```
-C:\Windows\System32\wsl.exe -e bash -lic "~/.local/share/JetBrains/Toolbox/scripts/phpstorm > /dev/null 2>&1 &"
 ```
 
 ### [npiperelay](https://github.com/jstarks/npiperelay/releases/tag/v0.1.0)
@@ -55,15 +47,26 @@ if [[ $ALREADY_RUNNING != "0" ]]; then
 fi
 ```
 
-### [Docker Desktop](https://docs.docker.com/desktop/install/windows-install/)
-Install docker desktop for windows and enable wsl2 integration
-
 ### [1Password](https://1password.com/downloads/windows/)
 My favourite password manager, especially with the ssh agent and windows hello authentication.
 
-
 ### [ShareX](https://github.com/ShareX/ShareX/releases)
 My favourite screenshot tool
+
+### [Cascadia Code Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/)
+Download the latest release. Install the windows font and set it as default in windows terminal (CaskaydiaCove NF Mono).
+Copy none windows fonts to `~/.local/share/fonts`
+
+### [Jetbrains Toolbox](https://www.jetbrains.com/toolbox-app/)
+Install jetbrains toolbox and install your favourite jetbrains IDE inside wsl2
+```
+curl https://gist.githubusercontent.com/greeflas/431bc50c23532eee8a7d6c1d603f3921/raw | bash
+```
+
+Windows shortcut path to start PHPStorm from windows start menu
+```
+C:\Windows\System32\wsl.exe -e bash -lic "~/.local/share/JetBrains/Toolbox/scripts/phpstorm > /dev/null 2>&1 &"
+```
 
 ### [Oh My Posh](https://ohmyposh.dev/docs/installation/linux)
 My favourite prompt theme engine
@@ -95,7 +98,3 @@ git clone https://github.com/shyim/shopware-docker.git ~/Documents/shopware-dock
 sudo ln -s /home/$USER/Documents/shopware-docker/swdc /usr/local/bin/swdc
 echo 'source "$HOME/Documents/shopware-docker/completion.sh"' >> ~/.bashrc
 ```
-
-### [Cascadia Code Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/)
-Download the latest release. Install the windows font and set it as default in windows terminal (CaskaydiaCove NF Mono).
-Copy none windows fonts to `~/.local/share/fonts`
