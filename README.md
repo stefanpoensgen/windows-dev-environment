@@ -60,7 +60,7 @@ Copy none windows fonts to `~/.local/share/fonts`
 ### [Jetbrains Toolbox](https://www.jetbrains.com/toolbox-app/)
 Install jetbrains toolbox and install your favourite jetbrains IDE inside wsl2
 ```
-curl https://gist.githubusercontent.com/greeflas/431bc50c23532eee8a7d6c1d603f3921/raw | bash
+curl -fsSL https://raw.githubusercontent.com/nagygergo/jetbrains-toolbox-install/master/jetbrains-toolbox.sh | bash
 ```
 
 Windows shortcut path to start PHPStorm from windows start menu
