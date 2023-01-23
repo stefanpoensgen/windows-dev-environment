@@ -5,30 +5,42 @@
 wsl --install
 ```
 
-### [Docker Desktop](https://docs.docker.com/desktop/install/windows-install/)
-Install docker desktop for windows and enable wsl2 integration
+### [WSL Hello sudo](https://github.com/nullpo-head/WSL-Hello-sudo)
+```
+wget https://github.com/nullpo-head/WSL-Hello-sudo/releases/latest/download/release.tar.gz
+tar xvf release.tar.gz
+cd release
+./install.sh
+```
 
 ### [X410](https://x410.dev/)
 My favourite x server for wsl2 to use linux gui apps
 ```
-echo 'export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0' >> ~/.profile
+sudo apt install socat
+echo 'export DISPLAY=:0.0' >> ~/.profile
 ```
 
-### [Google Chrome](https://www.google.com/intl/en_us/chrome/)
-Install google chrome for windows as daily driver and inside wsl2 for dependency reasons
-```
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
+Add to ~/.bashrc
+```shell
+# Configure vsock for x410
+export VSOCK=/tmp/.X11-unix/X0
+VSOCK_ALREADY_RUNNING=$(pgrep -f "VSOCK-CONNECT:2:6000" &>/dev/null; echo $?)
+if [[ $VSOCK_ALREADY_RUNNING != "0" ]]; then
+    if [[ -S $VSOCK ]]; then
+        echo "removing previous socket..."
+        rm $VSOCK
+    fi
+    echo "Starting VSOCK-CONNECT ..."
+    (setsid socat -b65536 UNIX-LISTEN:$VSOCK,fork,mode=777 VSOCK-CONNECT:2:6000 &) >/dev/null 2>&1
+fi
 ```
 
 ### [npiperelay](https://github.com/jstarks/npiperelay/releases/tag/v0.1.0)
 Allows to use ssh keys out of 1password from windows host with hello authentication.
 Download, extract the npiperelay.exe and place it somewhere in your PATH.
-```
-sudo apt install socat
-```
+
 Add to ~/.bashrc
-```
+```shell
 # Configure ssh forwarding
 export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
 # need `ps -ww` to get non-truncated command for matching
@@ -47,6 +59,15 @@ if [[ $ALREADY_RUNNING != "0" ]]; then
 fi
 ```
 
+### [Google Chrome](https://www.google.com/intl/en_us/chrome/)
+Install google chrome for windows as daily driver and inside wsl2 for dependency reasons
+```
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmour -o /usr/share/keyrings/google_linux_signing_key.gpg
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google_linux_signing_key.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list'
+sudo apt update
+sudo apt install google-chrome-stable
+```
+
 ### [1Password](https://1password.com/downloads/windows/)
 My favourite password manager, especially with the ssh agent and windows hello authentication.
 
@@ -56,6 +77,11 @@ My favourite screenshot tool
 ### [Cascadia Code Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/)
 Download the latest release. Install the windows font and set it as default in windows terminal (CaskaydiaCove NF Mono).
 Copy none windows fonts to `~/.local/share/fonts`
+
+Add emoji font aswell
+```
+sudo apt install fonts-noto-color-emoji
+```
 
 ### [Jetbrains Toolbox](https://www.jetbrains.com/toolbox-app/)
 Install jetbrains toolbox and install your favourite jetbrains IDE inside wsl2
@@ -74,23 +100,13 @@ My favourite prompt theme engine
 sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh
 sudo chmod +x /usr/local/bin/oh-my-posh
 
+mkdir ~/.config
 wget https://raw.githubusercontent.com/stefanpoensgen/windows-dev-environment/main/stefan.omp.json -O ~/.config/stefan.omp.json
 
 echo 'eval "$(oh-my-posh init bash --config ~/.config/stefan.omp.json)"' >> ~/.bashrc
 ```
 
-### [WSL Hello sudo](https://github.com/nullpo-head/WSL-Hello-sudo)
-```
-wget https://github.com/nullpo-head/WSL-Hello-sudo/releases/latest/download/release.tar.gz
-tar xvf release.tar.gz
-cd release
-./install.sh
-```
+### [devenv](https://devenv.sh/)
+My favourite dev setup for local development
 
-### [Shopware Docker by shyim](https://github.com/shyim/shopware-docker)
-My favourite shopware docker setup for local development
-```
-git clone https://github.com/shyim/shopware-docker.git ~/Documents/shopware-docker
-sudo ln -s /home/$USER/Documents/shopware-docker/swdc /usr/local/bin/swdc
-echo 'source "$HOME/Documents/shopware-docker/completion.sh"' >> ~/.bashrc
-```
+[Shopware - Devenv](https://developer.shopware.com/docs/guides/installation/devenv)
