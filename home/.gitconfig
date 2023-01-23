@@ -1,0 +1,17 @@
+[user]
+	email = mail@stefanpoensgen.de
+	name = Stefan Poensgen
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKS+RsxkJbEQsI8q7jJ/4QaEK2XHvnG6ZA0jKgxMqj+E
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[pull]
+	rebase = true
+[gpg]
+	format = ssh
+[init]
+	defaultBranch = main
+[core]
+	autocrlf = input
+	eol = lf
