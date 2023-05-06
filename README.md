@@ -17,7 +17,7 @@ cd release
 My favourite x server for wsl2 to use linux gui apps
 ```
 sudo apt install socat
-echo 'export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0)' >> ~/.profile
+echo 'export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0' >> ~/.profile
 ```
 
 Add to ~/.bashrc
