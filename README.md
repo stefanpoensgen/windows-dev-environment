@@ -67,7 +67,7 @@ sudo apt install fonts-noto-color-emoji
 ### [Jetbrains Toolbox](https://www.jetbrains.com/toolbox-app/)
 Install jetbrains toolbox and install your favourite jetbrains IDE inside wsl2
 ```bash
-sudo apt install libfuse2
+sudo apt install libfuse2 libgtk-3-dev
 curl -fsSL https://raw.githubusercontent.com/nagygergo/jetbrains-toolbox-install/master/jetbrains-toolbox.sh | bash
 ```
 
