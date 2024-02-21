@@ -1,9 +1,0 @@
-[Unit]
-Description=SSH Relay
-
-[Service]
-ExecStartPre=/bin/rm -f ${HOME}/.ssh/agent.sock
-ExecStart=/usr/bin/socat UNIX-LISTEN:${HOME}/.ssh/agent.sock,fork EXEC:"/mnt/c/Windows/system32/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork
-
-[Install]
-WantedBy=default.target
