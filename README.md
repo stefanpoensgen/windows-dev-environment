@@ -22,9 +22,11 @@ cd release
 ### [X410](https://x410.dev/)
 My favourite x server for wsl2 to use linux gui apps
 
-### [npiperelay](https://github.com/jstarks/npiperelay/releases/tag/v0.1.0)
+### [npiperelay](https://github.com/jstarks/npiperelay)
 Allows to use ssh keys out of 1password from windows host with hello authentication.
-Download, extract the npiperelay.exe and place it in C:\Windows\System32
+```bash
+winget install jstarks.npiperelay
+```
 
 ### [1Password](https://1password.com/downloads/windows/)
 My favourite password manager, especially with the ssh agent and windows hello authentication.
