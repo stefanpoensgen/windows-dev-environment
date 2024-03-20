@@ -134,7 +134,7 @@ in
     ExecStart = "${pkgs.writeShellScript "start-proxy" ''
       /bin/mkdir -p /tmp/.X11-unix
       /bin/rm -f /tmp/.X11-unix/X0
-      /usr/bin/socat -b65536 UNIX-LISTEN:/tmp/.X11-unix/X0,fork,mode=777 VSOCK-CONNECT:2:6000
+      ${pkgs.socat}/socat -b65536 UNIX-LISTEN:/tmp/.X11-unix/X0,fork,mode=777 VSOCK-CONNECT:2:6000
     ''}";
     };
     Install = {
