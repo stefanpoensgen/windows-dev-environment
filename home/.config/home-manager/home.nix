@@ -27,6 +27,8 @@ in
     # # "Hello, world!" when run.
     # pkgs.hello
     pkgs.wslu
+    pkgs.kubectl
+    pkgs.kubernetes-helm
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -40,7 +42,7 @@ in
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-	devenv.packages.${pkgs.system}.devenv
+	pkgs.devenv
 	froshpkgs.packages.${pkgs.system}.shopware-cli
 	jetbrains.packages.${pkgs.system}.jetbrains.phpstorm
 	pkgs.jetbrains-mono
