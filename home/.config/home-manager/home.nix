@@ -27,6 +27,7 @@ in
     # # "Hello, world!" when run.
     # pkgs.hello
     pkgs.wslu
+    pkgs.socat
     pkgs.kubectl
     pkgs.kubernetes-helm
 
