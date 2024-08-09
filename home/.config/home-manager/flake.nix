@@ -8,7 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-	devenv.url = "github:cachix/devenv/v0.6.3";
+	devenv.url = "github:cachix/devenv/main";
     devenv.inputs.nixpkgs.follows = "nixpkgs";
 	jetbrains = {
       url = "github:shyim/jetbrains-flake";
