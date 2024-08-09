@@ -8,7 +8,7 @@ wsl --install
 ### [Nix](https://nixos.org/download#nix-install-windows)
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-nix run home-manager/master -- switch
+cd .config/home-manager && nix run home-manager/master -- switch
 echo "$(which fish)" | sudo tee -a /etc/shells
 chsh -s "$(which fish)"
 ```
@@ -28,8 +28,6 @@ My favourite x server for wsl2 to use linux gui apps
 Allows to use ssh keys out of 1password from windows host with hello authentication.
 ```bash
 winget install -e --id jstarks.npiperelay
-winget install -e --id Discord.Discord
-winget install -e --id SlackTechnologies.Slack
 ```
 
 ### [1Password](https://1password.com/downloads/windows/)
@@ -60,8 +58,16 @@ My favourite dev setup for local development
 
 ### Update
 ```bash
+cd .config/home-manager
 nix flake update
 nix run home-manager/master -- switch
+```
+
+### Systemd
+```bash
+sudo chown 1000:1000 /run/user/1000
+systemctl --user start vsock.service
+systemctl --user start ssh-proxy.service
 ```
 
 ### Tools
