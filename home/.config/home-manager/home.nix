@@ -27,9 +27,9 @@ in
     # # "Hello, world!" when run.
     # pkgs.hello
     pkgs.wslu
-    pkgs.socat
     pkgs.kubectl
     pkgs.kubernetes-helm
+    pkgs.lazydocker
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -46,6 +46,7 @@ in
 	pkgs.devenv
 	froshpkgs.packages.${pkgs.system}.shopware-cli
 	jetbrains.packages.${pkgs.system}.jetbrains.phpstorm
+	jetbrains.packages.${pkgs.system}.fsnotifier
 	pkgs.jetbrains-mono
   ];
 
@@ -137,7 +138,7 @@ in
     ExecStart = "${pkgs.writeShellScript "start-proxy" ''
       /bin/mkdir -p /tmp/.X11-unix
       /bin/rm -f /tmp/.X11-unix/X0
-      ${pkgs.socat}/socat -b65536 UNIX-LISTEN:/tmp/.X11-unix/X0,fork,mode=777 VSOCK-CONNECT:2:6000
+      /usr/bin/socat -b65536 UNIX-LISTEN:/tmp/.X11-unix/X0,fork,mode=777 VSOCK-CONNECT:2:6000
     ''}";
     };
     Install = {
@@ -153,7 +154,7 @@ in
     ExecStart = "${pkgs.writeShellScript "start-proxy" ''
       rm -f ${socket}
       mkdir -p $(dirname ${socket})
-      setsid ${pkgs.socat}/bin/socat UNIX-LISTEN:${socket},fork EXEC:"/mnt/c/Users/stefan/AppData/Local/Microsoft/WinGet/Packages/jstarks.npiperelay_Microsoft.Winget.Source_8wekyb3d8bbwe/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork
+      setsid ${pkgs.socat}/bin/socat UNIX-LISTEN:${socket},fork EXEC:"/mnt/c/Windows/system32/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork
     ''}";
     };
     Install = {
