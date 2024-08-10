@@ -11,6 +11,7 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 cd .config/home-manager && nix run home-manager/master -- switch
 echo "$(which fish)" | sudo tee -a /etc/shells
 chsh -s "$(which fish)"
+wslview -r
 ```
 
 ### [WSL Hello sudo](https://github.com/nullpo-head/WSL-Hello-sudo)

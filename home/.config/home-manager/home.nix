@@ -23,14 +23,10 @@ in
   # environment.
   fonts.fontconfig.enable = true;
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
     pkgs.wslu
     pkgs.socat
     pkgs.kubectl
     pkgs.kubernetes-helm
-    pkgs.lazydocker
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -66,6 +62,7 @@ in
     # '';
   };
 
+
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
   # Manager then you have to manually source 'hm-session-vars.sh' located at
@@ -81,7 +78,7 @@ in
   #
   #  /etc/profiles/per-user/stefan/etc/profile.d/hm-session-vars.sh
   #
-  
+
   home.sessionVariables = {
     DISPLAY = ":0.0";
 	DIRENV_LOG_FORMAT = "";
@@ -90,15 +87,18 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  
+
   programs.fish = {
 	enable = true;
-	interactiveShellInit = ''
+	loginShellInit = ''
+	  fish_add_path /home/stefan/.nix-profile/bin
+	  fish_add_path /nix/var/nix/profiles/default/bin
 	  set fish_greeting
-	  set -gx ATUIN_NOBIND true
-	  atuin init fish | source
-	  bind \cr _atuin_search
-	  bind -M insert \cr _atuin_search
+	'';
+	interactiveShellInit = ''
+	  fish_add_path /home/stefan/.nix-profile/bin
+	  fish_add_path /nix/var/nix/profiles/default/bin
+	  set fish_greeting
 	'';
   };
 
@@ -116,10 +116,11 @@ in
       };
     };
   };
-  
+
   programs.atuin = {
     enable = true;
     enableFishIntegration = true;
+	flags = [ "--disable-up-arrow" ];
     settings = {
       auto_sync = true;
       sync_frequency = "5m";
@@ -130,32 +131,33 @@ in
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
-  
+  nixpkgs.config.allowUnfree = true;
+
   systemd.user.services.vsock = {
     Unit = {
       Description = "X410 VSock";
     };
     Service = {
     ExecStart = "${pkgs.writeShellScript "start-proxy" ''
-      /bin/mkdir -p /tmp/.X11-unix
-      /bin/rm -f /tmp/.X11-unix/X0
-      ${pkgs.socat}/socat -b65536 UNIX-LISTEN:/tmp/.X11-unix/X0,fork,mode=777 VSOCK-CONNECT:2:6000
+        /bin/mkdir -p /tmp/.X11-unix
+        /bin/rm -f /tmp/.X11-unix/X0
+        ${pkgs.socat}/bin/socat -b65536 UNIX-LISTEN:/tmp/.X11-unix/X0,fork,mode=777 VSOCK-CONNECT:2:6000
     ''}";
     };
     Install = {
       WantedBy = [ "default.target" ];
     };
   };
-  
+
   systemd.user.services.ssh-proxy = {
     Unit = {
       Description = "WSL Proxy";
     };
     Service = {
     ExecStart = "${pkgs.writeShellScript "start-proxy" ''
-      rm -f ${socket}
-      mkdir -p $(dirname ${socket})
-      setsid ${pkgs.socat}/bin/socat UNIX-LISTEN:${socket},fork EXEC:"/mnt/c/Users/stefan/AppData/Local/Microsoft/WinGet/Packages/jstarks.npiperelay_Microsoft.Winget.Source_8wekyb3d8bbwe/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork
+        rm -f ${socket}
+        mkdir -p $(dirname ${socket})
+        setsid ${pkgs.socat}/bin/socat UNIX-LISTEN:${socket},fork EXEC:"/mnt/c/Users/stefan/AppData/Local/Microsoft/WinGet/Packages/jstarks.npiperelay_Microsoft.Winget.Source_8wekyb3d8bbwe/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork
     ''}";
     };
     Install = {
