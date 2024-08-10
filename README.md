@@ -10,6 +10,7 @@ wsl --install
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 cd .config/home-manager && nix run home-manager/master -- switch
 echo "$(which fish)" | sudo tee -a /etc/shells
+sudo sh -c 'echo "trusted-users = root stefan" >> /etc/nix/nix.conf'
 chsh -s "$(which fish)"
 wslview -r
 ```
@@ -69,6 +70,11 @@ nix run home-manager/master -- switch
 sudo chown 1000:1000 /run/user/1000
 systemctl --user start vsock.service
 systemctl --user start ssh-proxy.service
+```
+
+### PhpStorm custom properties
+```bash
+idea.filewatcher.executable.path=/home/stefan/.nix-profile/bin/fsnotifier
 ```
 
 ### Tools

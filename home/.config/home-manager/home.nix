@@ -126,6 +126,7 @@ in
       sync_frequency = "5m";
       workspaces = true;
       update_check = false;
+      history_filter_mode = "global";
     };
   };
 
