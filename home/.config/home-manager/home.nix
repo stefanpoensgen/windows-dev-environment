@@ -27,6 +27,7 @@ in
     pkgs.socat
     pkgs.kubectl
     pkgs.kubernetes-helm
+    pkgs.fsnotifier
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
