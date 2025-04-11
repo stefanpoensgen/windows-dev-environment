@@ -27,6 +27,8 @@ in
     pkgs.socat
     pkgs.xdg-utils
     pkgs.cascadia-code
+    pkgs.unzip
+    pkgs.noto-fonts-color-emoji
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
