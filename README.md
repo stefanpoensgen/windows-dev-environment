@@ -60,9 +60,7 @@ My favourite dev setup for local development
 
 ### Update
 ```bash
-cd .config/home-manager
-nix flake update
-nix run home-manager/master -- switch
+cd ~/.config/home-manager && nix flake update && nix run home-manager/master -- switch
 ```
 
 ### Systemd
