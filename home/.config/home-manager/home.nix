@@ -28,7 +28,17 @@ in
     pkgs.xdg-utils
     pkgs.cascadia-code
     pkgs.unzip
+    pkgs.nodejs_22
+    pkgs.yarn
+    pkgs.claude-code
     pkgs.noto-fonts-color-emoji
+    pkgs._1password-cli
+	pkgs.devenv
+	pkgs.shopware-cli
+	pkgs.shopware-cli
+	pkgs.fsnotifier
+	pkgs.jetbrains.phpstorm
+	pkgs.jetbrains-mono
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -36,11 +46,6 @@ in
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-	pkgs.devenv
-	froshpkgs.packages.${pkgs.system}.shopware-cli
-	jetbrains.packages.${pkgs.system}.jetbrains.phpstorm
-	jetbrains.packages.${pkgs.system}.fsnotifier
-	pkgs.jetbrains-mono
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -154,7 +159,7 @@ in
     ExecStart = "${pkgs.writeShellScript "start-proxy" ''
         rm -f ${socket}
         mkdir -p $(dirname ${socket})
-        setsid ${pkgs.socat}/bin/socat UNIX-LISTEN:${socket},fork EXEC:"/mnt/c/Users/stefan/AppData/Local/Microsoft/WinGet/Packages/jstarks.npiperelay_Microsoft.Winget.Source_8wekyb3d8bbwe/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork
+        setsid ${pkgs.socat}/bin/socat UNIX-LISTEN:${socket},fork EXEC:"/mnt/c/Users/StefanPoensgen/AppData/Local/Microsoft/WinGet/Packages/jstarks.npiperelay_Microsoft.Winget.Source_8wekyb3d8bbwe/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork
     ''}";
     };
     Install = {
