@@ -70,11 +70,6 @@ systemctl --user start vsock.service
 systemctl --user start ssh-proxy.service
 ```
 
-### PhpStorm custom properties
-```bash
-idea.filewatcher.executable.path=/home/stefan/.nix-profile/bin/fsnotifier
-```
-
 ### Tools
 ```bash
 winget install -e --id Notepad++.Notepad++
