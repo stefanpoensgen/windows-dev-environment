@@ -1,4 +1,4 @@
-{ config, pkgs, lib, jetbrains, devenv, froshpkgs, ... }:
+{ config, pkgs, lib, pkgs-old, ... }:
 
 let
   socket = "${config.home.homeDirectory}/.ssh/agent.sock";
@@ -35,9 +35,8 @@ in
     pkgs._1password-cli
 	pkgs.devenv
 	pkgs.shopware-cli
-	pkgs.shopware-cli
 	pkgs.fsnotifier
-	pkgs.jetbrains.phpstorm
+	#pkgs-old.jetbrains.phpstorm
 	pkgs.jetbrains-mono
 
     # # You can also create simple shell scripts directly inside your
@@ -84,6 +83,7 @@ in
     DISPLAY = ":0.0";
 	DIRENV_LOG_FORMAT = "";
 	BROWSER = "wslview";
+	XCURSOR_SIZE = 14;
   };
 
   # Let Home Manager install and manage itself.
@@ -94,11 +94,15 @@ in
 	loginShellInit = ''
 	  fish_add_path /home/stefan/.nix-profile/bin
 	  fish_add_path /nix/var/nix/profiles/default/bin
+      fish_add_path ~/.local/share/JetBrains/Toolbox/scripts
+      fish_add_path ~/.local/bin
 	  set fish_greeting
 	'';
 	interactiveShellInit = ''
 	  fish_add_path /home/stefan/.nix-profile/bin
 	  fish_add_path /nix/var/nix/profiles/default/bin
+      fish_add_path ~/.local/share/JetBrains/Toolbox/scripts
+	  fish_add_path ~/.local/bin
 	  set fish_greeting
 	'';
   };
