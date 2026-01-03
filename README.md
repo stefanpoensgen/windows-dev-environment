@@ -23,6 +23,11 @@ cd release
 ./install.sh
 ```
 
+### [Jetbrains Toolbox](https://www.jetbrains.com/toolbox-app/)
+```bash
+curl -fsSL https://raw.githubusercontent.com/nagygergo/jetbrains-toolbox-install/master/jetbrains-toolbox.sh | bash
+```
+
 ### [X410](https://x410.dev/)
 My favourite x server for wsl2 to use linux gui apps
 
